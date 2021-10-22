@@ -225,7 +225,7 @@ after
 conn.send2ButtonLoc(m.chat, await (await fetch('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrF6fyFoGCHmsmOXWjFxIXh-467D1nRhA4mQ&usqp=CAU')).buffer(), text, "Regards By Kotz", `Dashboard`, `sdashboard`, `Syarat & Ketentuan`, `rules`, m)
 break;
 
-case "sdashboard"
+case "sdashboard":
 let asu = `total commands ${Object.keys(Events).length}\n\n`
 for (i in db.data) {
 asu += `-${i}: ${db.data[i]}\n`
