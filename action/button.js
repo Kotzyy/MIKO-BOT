@@ -41,8 +41,8 @@ switch (button.split(" ")[0].toLowerCase()) {
     const wasVote = absen.includes(m.sender)
     if (wasVote) return m.reply('*Kamu sudah absen!*')
     absen.push(m.sender)
-     let d = new Date
-     date = d.toLocaleDateString('id', {
+     let ds = new Date
+     date = ds.toLocaleDateString('id', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
