@@ -1,4 +1,3 @@
-
 FROM node:16.6.1-buster
 
 RUN apt-get update && \
@@ -14,9 +13,13 @@ RUN apt-get update && \
 COPY package.json .
 RUN npm install -g npm@7.20.5
 RUN npm install
+RUN npm install pm2 -g
+ENV PM2_PUBLIC_KEY mx31skldb8ixasa
+ENV PM2_SECRET_KEY urq7u9tozalh1iz
+
 
 COPY . .
 
 EXPOSE 5000
 
-CMD ["node", "index"]`
+CMD ["pm2-runtime", "index.js"]`
