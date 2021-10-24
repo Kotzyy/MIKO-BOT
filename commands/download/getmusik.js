@@ -18,9 +18,9 @@ async execute(m) {
 
 if (!m.quoted.caption) return m.reply ('tolong reply hasil data yang di kirim oleh bot')
 if (!args[0]) return m.reply("id or angka?")
-let hasilSplit = m.quoted.caption.split("(#)")[1]
+let hasilSplit = m.quoted.caption.split("(#)")[args(1)]
 console.log(hasilSplit)
-let hasil = "https://youtu.be/" + hasilSplit
+let hasil = ("https://youtu.be/" + hasilSplit)
 let server = (hasil || servers[0]).toLowerCase()
 
   let { dl_link, thumb, title, filesize, filesizeF } = await yta(args[0], servers.includes(server) ? server : servers[0])
