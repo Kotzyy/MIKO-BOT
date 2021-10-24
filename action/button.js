@@ -216,7 +216,7 @@ before,
 ...Object.keys(tags).map(v => {
 return type.replace(/#type/g, tags[v]) + ("\n") + [
 ...raw.filter(menu => menu.type && menu.type.includes(v) && menu.help).map(menu => {
-return "*°* " + userbot.prefix + menu.help
+return "*❒* " + userbot.prefix + menu.help
 })].join("\n")
 }),
 after
