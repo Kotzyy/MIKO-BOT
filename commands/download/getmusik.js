@@ -17,7 +17,7 @@ async execute(m) {
  let { conn, text } = data
 
 if (!m.quoted.caption) return m.reply('tolong reply hasil data yang di kirim oleh bot')
-if (!args[0]) return m.reply("Example = " + userbot.prefix + "getmusic 1" )
+if (!args[0]) return m.reply("id or angka?")
 let server = ("https://youtu.be/" + args[1] || servers[0]).toLowerCase()
 
   let { dl_link, thumb, title, filesize, filesizeF } = await yta(args[0], servers.includes(server) ? server : servers[0])
