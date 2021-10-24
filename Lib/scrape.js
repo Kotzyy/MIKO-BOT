@@ -12,6 +12,7 @@ const path = require('path')
 const axios = require('axios')
 const src = path.join(__dirname, './data/src/')
 const _font = path.join(src, 'font')
+const { default: Axios } = require("axios")
 let tmp = path.join(__dirname, './')
 const aesthetic = path.join(src, 'canvas/')
 //Variable
@@ -1907,6 +1908,85 @@ axios({
     }
     return result
 }*/
+function cnn(g="internasional"){
+  return new Promise((resolve,reject)=>{
+    axios.get(`https://www.cnnindonesia.com/${g}`).then(({ data }) => {
+      const hasil = []
+      const $ = cheerio.load(data)
+      $('article').each(function(a, b) {
+        const link = $(b).find('a').attr('href')
+        const thumb = $(b).find('img').attr('src') 
+        const judul = $(b).find('img').attr('alt')
+        hasil.push({ judul, link, thumb })
+      })
+      resolve(hasil)
+    }).catch(reject)
+  })
+}
+function ramalanJodoh(nama1,nama2){
+  return new Promise((resolve,reject)=>{
+    Axios.get('https://www.primbon.com/kecocokan_nama_pasangan.php?nama1='+nama1+'&nama2='+nama2+'&proses=+Submit%21+').then(({ data }) => {
+      const $ = cheerio.load(data)
+      const img = 'https://www.primbon.com/'+$('#body > img').attr('src')
+      const isi = $('#body').text().split(nama2)[1].replace('< Hitung Kembali','').split('\n')[0]
+      const positif = isi.split('Sisi Negatif Anda: ')[0].replace('Sisi Positif Anda: ','')
+      const negatif = isi.split('Sisi Negatif Anda: ')[1]
+      resolve({
+        nama1,
+        nama2,
+        img,
+        positif,
+        negatif
+      })
+    }).catch(reject)
+  })
+}
+function ramalanJadian(tanggal, bulan, tahun) {
+  return new Promise((resolve,reject)=>{
+    if(isNaN(tanggal) && isNaN(bulan) && isNaN(tahun)) throw `Tanggal bulan tahun harus berupa angka`
+    axios.get(`https://www.primbon.com/tanggal_jadian_pernikahan.php?tgl=${tanggal}&bln=${bulan}&thn=${tahun}&proses=+Submit%21+`).then(({ data }) => {
+      resolve(cheerio.load(data)('#body').text().trim().replace('MAKNA TANGGAL JADIAN, PERNIKAHAN', '').replace('Karakteristik:', '\nKarakteristik : ').replace('< Hitung Kembali', ''))
+    }).catch(reject)
+  })
+}
+function wiki(q){
+  return new Promise((resolve,reject)=>{
+    axios.get(`https://id.m.wikipedia.org/w/index.php?search=${q}`).then(({ data }) => {
+      const $ = cheerio.load(data)
+      const hasil = []
+      let wiki = $('#mf-section-0').find('p').text()
+      let thumb = $('#mf-section-0').find('div > div > a > img').attr('src')
+      thumb = thumb ? thumb : '//pngimg.com/uploads/wikipedia/wikipedia_PNG35.png'
+      thumb = 'https:' + thumb
+      let judul = $('h1#section_0').text()
+      hasil.push({ wiki, thumb, judul })
+      resolve(hasil)
+    }).catch(reject)
+  })
+}
+function brainly(pertanyaan,jumlah,callback){
+  return new Promise((resolve,reject)=>{
+    require("brainly-scraper")(pertanyaan.toString(),Number(jumlah)).then((res) => {
+      let brainlyResult = []
+      res.data.forEach((ask) => {
+        let opt = {
+          pertanyaan: ask.pertanyaan,
+          fotoPertanyaan: ask.questionMedia
+        }
+        ask.jawaban.forEach(answer => {
+          opt.jawaban = {
+            judulJawaban: answer.text,
+            fotoJawaban: answer.media
+          }
+        })
+        brainlyResult.push(opt)
+      })
+      resolve(brainlyResult)
+    }).then(a => {
+        callback(a)
+    }).catch(reject)
+  })
+}
 
 module.exports.Searchnabi = Searchnabi
 module.exports.tiktok = tiktok
@@ -1950,3 +2030,8 @@ module.exports.joox = joox
 module.exports.uguu = uguu
 module.exports.artinama = artinama
 /*module.exports.fbdl = fbdl*/
+module.exports.cnn = cnn
+module.exports.ramalanJodoh = ramalanJodoh
+module.exports.ramalanJadian = ramalanJadian
+module.exports.wiki = wiki
+module.exports.brainly = brainly
