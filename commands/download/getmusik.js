@@ -18,13 +18,13 @@ async execute(m) {
 
 if (!m.quoted.caption) return m.reply ('tolong reply hasil data yang di kirim oleh bot')
 if (!args[0]) return m.reply("id or angka?")
-let fear = args[1]
+let fear = args[0]
 let hasilSplit = m.quoted.caption.split("(#)")[`${fear}`]
 console.log(hasilSplit)
 let hasil = ("https://youtu.be/" + hasilSplit)
 let server = (hasil || servers[0]).toLowerCase()
 
-  let { dl_link, thumb, title, filesize, filesizeF } = await yta(args[0], servers.includes(server) ? server : servers[0])
+  let { dl_link, thumb, title, filesize, filesizeF } = await yta(hasil, servers.includes(server) ? server : servers[0])
 
   let isLimit = (limit) * 1024 < filesize  
   m.reply(isLimit ? `Ukuran File: ${filesizeF}\nUkuran file diatas ${limit} MB, download sendiri: ${dl_link}` : 'compressing...')
