@@ -6,8 +6,8 @@ const { MessageType }= require('@adiwajshing/baileys'),
       tags = {}
       speed = global.Ft['speed']
       os = global.Ft['os']
-      tiktok = require("../../Lib/scrape.js").tiktok
-      tiktokmusic = require("../../Lib/scrape").tiktokmusic
+      { tiktok } = require("../../Lib/scrape.js"),
+      { tiktokmusic } = require("../../Lib/scrape")
 
 module.exports = {
 async execute(m, {button, args, text }) {
@@ -41,15 +41,9 @@ switch (button.split(" ")[0].toLowerCase()) {
     const wasVote = absen.includes(m.sender)
     if (wasVote) return m.reply('*Kamu sudah absen!*')
     absen.push(m.sender)
-     let ds = new Date
-     date = ds.toLocaleDateString('id', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    })
+     
     list = absen.map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')
      caption = `
-Tanggal: ${date}
 ${conn.absen[id][2]}
 ┌〔 daftar absen 〕
 │ 
@@ -79,16 +73,9 @@ ${list}
         throw false
     }
 
-       d = new Date
-       date = d.toLocaleDateString('id', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    })
     absen = conn.absen[id][1]
     list = absen.map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')
     caption = `
-Tanggal: ${date}
 ${conn.absen[id][2]}
     
 ┌〔 daftar absen 〕
@@ -99,6 +86,7 @@ ${list}
 └────`.trim()
     await conn.send2Button(m.chat, caption, userbot.packname, 'Delete', 'absend', 'Absen', 'absen', { quoted: m, contextInfo: {"mentionedJid": conn.parseMention(caption)}} )
    break;
+
 
    case "twm":
    m.reply('sedang memproses')
@@ -133,6 +121,7 @@ ${list}
    json = await res.json()
    conn.sendFile(m.chat, json.result.audio, 'o.mp3', null, m)
    break;
+   
    case "menu":
 let me = conn.user.name
 uptime = process.uptime();
