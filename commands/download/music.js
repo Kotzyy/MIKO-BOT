@@ -5,7 +5,6 @@ let fetch = require('node-fetch')
 module.exports = {
 
 name: ["music"],
-
 type: ["download"],
 useLimit: true,
 description: "Download and searching music dri YouTube",
@@ -13,8 +12,7 @@ utilisation: userbot.prefix + "music <query>",
 
 async execute(m) {
 
- let { conn, text } = data
-
+let { conn, text } = data
 if (!text) return m.reply('Mau Cari Apa?')
 let results = await yts(text)
 let result = results.all
