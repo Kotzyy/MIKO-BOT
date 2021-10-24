@@ -1,4 +1,5 @@
 const fs = Ft.fs
+const { servers, yta, ytv } = require("../../Lib/y2mate.js")
 let yts = require('yt-search')
 let fetch = require('node-fetch')
 
@@ -9,22 +10,24 @@ name: ["getmusic"],
 type: ["download"],
 useLimit: true,
 description: "Download and searching music dri YouTube",
-utilisation: userbot.prefix + "getmusic <link>",
+utilisation: userbot.prefix + "getmusic <query>",
 
 async execute(m) {
 
  let { conn, text } = data
 
-if (!text) return m.reply('where text?')
-let results = await yts(text)
-let result = results.all
-if (!result) throw 'Pencarian Anda Tidak di Temukan'
-let berhitung = 1
-let xixixi = `*「 YOUTUBE MUSIC 」*\n\n*Hasil Pencarian : ${text} *\n\n─────────────────\n\nKetik ${userbot.prefix}getmusic [ Angka ] untuk mengambil ID, Contoh : ${userbot.prefix}getmusic 2\n`
+if (!m.quoted.caption) return m.reply('tolong reply hasil data yang di kirim oleh bot')
+if (!args[0]) return m.reply("Example = " + userbot.prefix + "getmusic 1" )
+let server = ("https://youtu.be/" + args[1] || servers[0]).toLowerCase()
 
-for (let i = 0; i < result.length; i++) {
- xixixi += `\n─────────────────\n\n*Urutan* : ${berhitung+i}\n*Title* : ${result[i].title}\n*Channel* : ${result[i].author.name}\n*Durasi* : ${result[i].timestamp}\n*Perintah download* : \n*${prefix}getmusic ${result[i].videoId}*\n`
-                    }
-conn.sendMessage(m.chat,await (await Ft.fetch(result[0].thumbnail)).buffer(),"imageMessage",{quoted:m, caption: xixixi, thumbnail:Buffer.alloc(0)})
+  let { dl_link, thumb, title, filesize, filesizeF } = await yta(args[0], servers.includes(server) ? server : servers[0])
+
+  let isLimit = (limit) * 1024 < filesize  
+  m.reply(isLimit ? `Ukuran File: ${filesizeF}\nUkuran file diatas ${limit} MB, download sendiri: ${dl_link}` : 'compressing...')
+  conn.sendButtonLoc(m.chat, await (await fetch (thumb)).buffer(), `
+  *ＹＴＭＰ3 ＹＯＵＴＵＢＥ*
+  *Title:* ${title}
+  *Size:* ${filesizeF}`, userbot.packname, 'Menu', 'menu', m)
+  if (!isLimit) conn.sendFile(m.chat, dl_link, title + ".mp3", null, m)
 }
 }
