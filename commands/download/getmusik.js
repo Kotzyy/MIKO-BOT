@@ -20,10 +20,10 @@ let results = await yts(text)
 let result = results.all
 if (!result) throw 'Pencarian Anda Tidak di Temukan'
 let berhitung = 1
-let xixixi = `*「 YOUTUBE MUSIC 」*\n\n*Hasil Pencarian : ${text} *\n\n─────────────────\n\nKetik ${userbot.prefix}getmusik [ Angka ] untuk mengambil ID, Contoh : ${userbot.prefix}getmusik 2\n`
+let xixixi = `*「 YOUTUBE MUSIC 」*\n\n*Hasil Pencarian : ${text} *\n\n─────────────────\n\nKetik ${userbot.prefix}getmusic [ Angka ] untuk mengambil ID, Contoh : ${userbot.prefix}getmusic 2\n`
 
 for (let i = 0; i < result.length; i++) {
- xixixi += `\n─────────────────\n\n*Urutan* : ${berhitung+i}\n*Title* : ${result[i].title}\n*Channel* : ${result[i].author.name}\n*Durasi* : ${result[i].timestamp}\n*Perintah download* : \n*${prefix}getmusik ${result[i].videoId}*\n`
+ xixixi += `\n─────────────────\n\n*Urutan* : ${berhitung+i}\n*Title* : ${result[i].title}\n*Channel* : ${result[i].author.name}\n*Durasi* : ${result[i].timestamp}\n*Perintah download* : \n*${prefix}getmusic ${result[i].videoId}*\n`
                     }
 conn.sendMessage(m.chat,await (await Ft.fetch(result[0].thumbnail)).buffer(),"imageMessage",{quoted:m, caption: xixixi, thumbnail:Buffer.alloc(0)})
 }
