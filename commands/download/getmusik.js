@@ -14,9 +14,9 @@ utilisation: userbot.prefix + "getmusic <query>",
 
 async execute(m) {
 
- let { conn, text } = data
+ let { conn, args } = data
 
-if (!m.quoted.caption) return m.reply('tolong reply hasil data yang di kirim oleh bot')
+if (!m.quoted.caption) return m.reply ('tolong reply hasil data yang di kirim oleh bot')
 if (!args[0]) return m.reply("id or angka?")
 let server = ("https://youtu.be/" + args[1] || servers[0]).toLowerCase()
 
