@@ -18,7 +18,7 @@ async execute(m) {
 
 if (!m.quoted.caption) return m.reply ('tolong reply hasil data yang di kirim oleh bot')
 if (!args[0]) return m.reply("id or angka?")
-let hasilSplit = m.quoted.caption.split("(#)")args[1]
+let hasilSplit = m.quoted.caption.split("(#)")[args[1]]
 let hasil = "https://youtu.be/" + hasilSplit
 let server = (hasil || servers[0]).toLowerCase()
 
