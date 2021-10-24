@@ -16,6 +16,6 @@ let { conn, text } = data
 	let res = await nhentai.search(text)
 	let txt = res.map(({ title, id, language }) => {
     return `*${title}*\n• ID: ${id}\n• Language: ${language}\n• Link: https://cin.pw/v/${id}`}).join('\n' + '='.repeat(25) + '\n')
-	await conn.sendFile(from, res[0].thumbnail, '', '*NHentai Search*\n\n' + txt, m)
+	await conn.sendFile(m.chat, res[0].thumbnail, '', '*NHentai Search*\n\n' + txt, m)
   }
 }
