@@ -32,7 +32,7 @@ let { conn, args } = data
 	let categories = details.categories.map(v => v.name)
 	let array_page = doujin.pages
 
-	await conn.sendFile(m.chat, array_page[0], '', `*${title}*\n_${doujin.title.native || ''}_\nLanguage: ${doujin.language}\nParodies: ${parodies.join(', ')}\nGroups: ${groups.join(', ')}\nArtists: ${artists.join(', ')}\nTags: ${tags.join(', ')}\nCategories: ${categories.join(', ')}\nPages: ${array_page.length}\nFavorited: ${doujin.favorites}\nLink: ${doujin.link.replace('nhentai.net/g', 'cin.pw/v')}`, m)
+	conn.sendMessage(m.chat,await (await Ft.fetch(array_page[0])).buffer(),"imageMessage",{quoted:m, caption: `*${title}*\n_${doujin.title.native || ''}_\nLanguage: ${doujin.language}\nParodies: ${parodies.join(', ')}\nGroups: ${groups.join(', ')}\nArtists: ${artists.join(', ')}\nTags: ${tags.join(', ')}\nCategories: ${categories.join(', ')}\nPages: ${array_page.length}\nFavorited: ${doujin.favorites}\nLink: ${doujin.link.replace('nhentai.net/g', 'cin.pw/v')}`, thumbnail:Buffer.alloc(0)})
 
 	for (let index = 0; index < array_page.length; index++) {
 		if (!fs.existsSync('./nhentai')) fs.mkdirSync('./nhentai')
