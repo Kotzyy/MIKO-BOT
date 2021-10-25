@@ -27,12 +27,12 @@ axios.get(`https://api.zeks.me/api/yts?apikey=FearTeamWibu&q=${text}`).then((xre
                            {
                               "title": "MP3",
 							  description: `Title: ${xres.video.title}\n\nUploader: ${xres.uploader.username}`,
-                              "rowId": `audio ${xres.video.url}`
+                              "rowId": `${userbot.prefix} ${xres.video.url}`
                            },
 						   {
                               "title": "MP4",
 							  description: `Title: ${xres.video.title}\n\nUploader: ${xres.uploader.username}`,
-                              "rowId": `video ${xres.video.url}`
+                              "rowId": `${userbot.prefix} ${xres.video.url}`
                            }
                         ], title: i+1})
 			})
