@@ -5,6 +5,9 @@ userbot = {
    wait: "tunggu sedang di proses...",
    error: "errorr!!"
    },
+   apikey: {
+   key: "Kotzkey"
+   },
    prefix: ["!"],
    gexp: 50,
    limit: 100,
