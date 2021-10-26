@@ -4,8 +4,8 @@ module.exports = {
 name: ["getsider"],
 type: ['group'],
 description: "get sider member group",
-admin: true,
-botAdmin:true,
+admin: false,
+botAdmin:false,
 utilisation: userbot.prefix+ "getsider",
 
 async execute(m) {
