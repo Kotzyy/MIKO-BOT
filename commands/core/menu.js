@@ -99,7 +99,7 @@ buttons = [
   }
   ]
   imageMsg = (await conn.prepareMessageMedia((await (await Ft.fetch("https://telegra.ph/file/68ad13ca9fc043053cbb0.jpg")).buffer()), 'imageMessage', {thumbnail: Buffer.alloc(0)})).imageMessage
-  buttonsMessage = { contentText: `${menu}`, footerText: 'Regards Kotz', imageMessage: imageMsg, buttons: buttons, headerType: 4 }
+  buttonsMessage = { contentText: `${capt}`, footerText: 'Regards Kotz', imageMessage: imageMsg, buttons: buttons, headerType: 4 }
   prep = await conn.prepareMessageFromContent(m.chat,{buttonsMessage},{quoted: m, contextInfo: { externalAdReply: { title: 'My Name Kotz', body: 'My Waifu Emilia', mediaType: 2, thumbnailUrl: "https://telegra.ph/file/68ad13ca9fc043053cbb0.jpg", mediaUrl: "https://youtu.be/aDJpFh2c_qg" }}})
   conn.relayWAMessage(prep)
 }
