@@ -1,4 +1,4 @@
-const fs = Ft.fs
+let fs = require('fs')
 let axios = require('axios')
 let fetch = require('node-fetch')
 
@@ -21,12 +21,12 @@ buttons = [
       displayText: `Next✨`
     },
     type:1}]
-Ft.fs.writeFileSync(`./${m.sender}.jpeg`, await (await Ft.fetch(data.data.result[`${pin}`])).buffer())
-imageMsg = ( await conn.prepareMessage(from, Ft.fs.readFileSync(`./${m.sender}.jpeg`), 'imageMessage', {thumbnail: Buffer.alloc(0)})).message.imageMessage
+fs.writeFileSync(`./kotz.jpeg`, await (await Ft.fetch(data.data.result[`${pin}`])).buffer())
+imageMsg = ( await conn.prepareMessage(from, fs.readFileSync(`./kotz.jpeg`), 'imageMessage', {thumbnail: Buffer.alloc(0)})).message.imageMessage
 buttonsMessage = {footerText:'Regards By Kotz', imageMessage: imageMsg,
 contentText:`*Hasil Pencarian Dari : ${text}*`,buttons,headerType:4}
 prep = await conn.prepareMessageFromContent(from,{buttonsMessage},{})
 conn.relayWAMessage(prep)
-Ft.fs.unlinkSync(`./${m.sender}.jpeg`)
+fs.unlinkSync(`./kotz.jpeg`)
 }
 }
