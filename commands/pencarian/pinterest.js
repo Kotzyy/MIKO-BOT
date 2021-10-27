@@ -10,7 +10,7 @@ utilisation: userbot.prefix+"pinterest",
 async execute(m){
 let { conn, text } = data
 if (!text) return m.reply('where text?')
-data = await axios.get(`https://ogata-api.herokuapp.com/api/search/pinterest?query=${q}&apikey=${apikey}`)
+data = await axios.get(`https://ogata-api.herokuapp.com/api/search/pinterest?query=${text}&apikey=KotzKey`)
 const pekok = ['1','2','3','4','5','6','7','8','9','10','11','12','13']
 const pin = pekok[Math.floor(Math.random() * (pekok.length))]
 buttons = [
