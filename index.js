@@ -21,7 +21,7 @@ global.antidelete = false
                 global.Public = false
                  global.scrap = require("./Lib/scrape")
 
-console.log(Ft.banner.string)
+console.log("KONTOL")
 conn.version = [2, 2119, 6]
 conn.logger.level = "warn"
 conn.browserDescription = ['R I X L E ', 'EDGE', '94.0.992.47'] 
