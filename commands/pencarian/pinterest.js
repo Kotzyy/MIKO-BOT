@@ -12,8 +12,10 @@ async execute(m){
 let { conn, text } = data
 if (!text) return m.reply('where text?')
 axios.get(`https://api.anesmlbb.studio/api/search/pinterest?query=${text}&apikey=KotzKey`).then((fear) =>{
-          pekok = ['1','2','3','4','5','6','7','8','9','10','11','12','13']
-          pin = pekok[Math.floor(Math.random() * (pekok.length))]
+  fs.writeFileSync(`./kotz.jpeg`, await (await Ft.fetch(fear.data.result[`${pin}`])).buffer())
+})
+pekok = ['1','2','3','4','5','6','7','8','9','10','11','12','13']
+pin = pekok[Math.floor(Math.random() * (pekok.length))]
 buttons = [
   {
     buttonId: `pinterest ${text}`,
@@ -21,13 +23,11 @@ buttons = [
       displayText: `Next✨`
     },
     type:1}]
-fs.writeFileSync(`./kotz.jpeg`, await (await Ft.fetch(fear.data.result[`${pin}`])).buffer())
 imageMsg = ( await conn.prepareMessage(from, fs.readFileSync(`./kotz.jpeg`), 'imageMessage', {thumbnail: Buffer.alloc(0)})).message.imageMessage
 buttonsMessage = {footerText:'Regards By Kotz', imageMessage: imageMsg,
 contentText:`*Hasil Pencarian Dari : ${text}*`,buttons,headerType:4}
 prep = await conn.prepareMessageFromContent(from,{buttonsMessage},{})
 conn.relayWAMessage(prep)
 fs.unlinkSync(`./kotz.jpeg`)
-})
 }
 }
