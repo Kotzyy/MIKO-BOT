@@ -235,15 +235,6 @@ this['fs'].watch(this['path'].join(__dirname, '../action'), global.reloadd);
   let p = this.spawn(process.argv[0], args, {
     stdio: ['inherit', 'inherit', 'inherit', 'ipc']
   })
-module.exports = {
-  name: "antivirtex",
-  async functions(m) {
-        if (m.text && m.text.length <= 1000) {
-  await this.groupRemove(m.chat, [m.sender])
-  m.reply(Ft.Res("\n".repeat(500) + "AntiVirtext By Kotz\nSince © 2019 - 2021")
-}
-}
-}
   p.on('message', data => {
     console.log('[RECEIVED]', data)
     switch (data) {
