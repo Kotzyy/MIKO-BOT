@@ -82,10 +82,26 @@ Miko Tidak Menggunakan tanda
 []
 Terima kasih
 メ ──❒「 END INFO 」 ❒`
-
-m.reply('Getting data to view Menu')
-conn.send2ButtonLoc( m.chat, await ( await fetch('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE7EnNkFf8-jer8k6eT_gd9butzTdl-s91uPaEhL-ggw3-h8T90x-h8Z66&s=10')).buffer(), capt, userbot.packname, `Menu`, `menu`, `Rules`, `rules`, m)
-
+buttons = [
+  {
+    buttonId: `menu`,
+    buttonText:{
+      displayText: '☘️MENU'
+  },
+  type:1
+  },
+  {
+    buttonId: `creator`,
+    buttonText:{
+      displayText: '👥CREATOR'
+  },
+  type:1
+  }
+  ]
+  imageMsg = (await conn.prepareMessageMedia((await (await Ft.fetch("https://telegra.ph/file/68ad13ca9fc043053cbb0.jpg")).buffer()), 'imageMessage', {thumbnail: Buffer.alloc(0)})).imageMessage
+  buttonsMessage = { contentText: `Regards By Kotz`, footerText: 'Regards Kotz', imageMessage: imageMsg, buttons: buttons, headerType: 4 }
+  prep = await conn.prepareMessageFromContent(m.chat,{buttonsMessage},{quoted: m, contextInfo: { externalAdReply: { title: 'My Name Kotz', body: 'My Waifu Emilia', mediaType: 2, thumbnailUrl: "https://telegra.ph/file/68ad13ca9fc043053cbb0.jpg", mediaUrl: "https://youtu.be/aDJpFh2c_qg" }}})
+  conn.relayWAMessage(prep)
 }
 }
 
