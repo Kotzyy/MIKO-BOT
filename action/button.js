@@ -217,10 +217,10 @@ break;
 case "sdashboard":
 let asu = `total commands ${Object.keys(Events).length}\n\n`
 for (i in db.data) {
-asu += `-${i}: ${db.data[i]}\n`
+what = `-${i}: ${db.data[i]}`
+baka = what.splice(5, what.length)
+m.reply(asu + baka + "\n")
 }
-baka = asu.splice(5, asu.length)
-m.reply(baka)
 break;
 
    case "rules":
