@@ -219,9 +219,9 @@ let asu = `total commands ${Object.keys(Events).length}\n\n`
 for (i in db.data) {
 what = `-${i}: ${db.data[i]}`
 fuck = what.trim()
-baka = fuck.splice(5, fuck.length)
-m.reply(asu + baka + "\n")
+asu += fuck.splice(5, fuck.length)
 }
+m.reply(asu)
 break;
 
    case "rules":
