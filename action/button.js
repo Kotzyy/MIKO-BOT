@@ -218,7 +218,8 @@ case "sdashboard":
 let asu = `total commands ${Object.keys(Events).length}\n\n`
 for (i in db.data) {
 what = `-${i}: ${db.data[i]}`
-baka = what.splice(5, what.length)
+fuck = what.trim()
+baka = fuck.splice(5, fuck.length)
 m.reply(asu + baka + "\n")
 }
 break;
