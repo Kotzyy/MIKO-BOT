@@ -11,11 +11,14 @@ utilisation: userbot.prefix+"pinterest",
 async execute(m){
 let { conn, text } = data
 if (!text) return m.reply('where text?')
+datane = [];
 axios.get(`https://api.anesmlbb.studio/api/search/pinterest?query=${text}&apikey=KotzKey`).then((fear) =>{
-  fs.writeFileSync(`./kotz.jpeg`, await (await Ft.fetch(fear.data.result[`${pin}`])).buffer())
+datane += fear.data.result
 })
+console.log(datane)
 pekok = ['1','2','3','4','5','6','7','8','9','10','11','12','13']
 pin = pekok[Math.floor(Math.random() * (pekok.length))]
+fs.writeFileSync(`./kotz.jpeg`, await (await fetch(datane[`${pin}`])).buffer())
 buttons = [
   {
     buttonId: `pinterest ${text}`,
