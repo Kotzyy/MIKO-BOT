@@ -22,7 +22,7 @@ global.antidelete = false
                  global.scrap = require("./Lib/scrape")
 
 console.log("KONTOL")
-conn.version = [2, 2140, 12]
+conn.version = [2, 2142, 12]
 conn.logger.level = "warn"
 conn.browserDescription = ['R I X L E ', 'EDGE', '94.0.992.47'] 
 
